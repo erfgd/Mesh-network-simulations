@@ -154,3 +154,48 @@ network aodv_sim
                 @display("p=50,200");
         }
 }
+
+
+network ideal_mesh_sim
+{
+    parameters:
+        @statistic[packetJitter];
+        @display("bgb=3000,3000");
+
+
+        int numServers;
+        int numRelays;
+        int numClients;
+        
+        
+
+    submodules:
+        Router[numRelays]: AdhocHost {
+            @display("p=570.76,456.60803");
+        }
+        clients[numClients]: AdhocHost {
+            @display("p=900.4375,900.3625");
+        }
+        server[numServers]: AdhocHost {
+            @display("p=800.96,1000.744");
+        }
+        radioMedium: IdealRadioMedium {
+            @display("p=503,184");
+        }
+        configurator: IPv4NetworkConfigurator {
+            @display("p=576.768,408.544");
+        }
+
+        visualizer: IntegratedVisualizer {
+            @display("p=273.08798,224.896");
+        }
+        scenarioManager: ScenarioManager {
+            parameters:
+                script = default(xml("<scenario/>"));
+                @display("p=50,250");
+        }
+        lifecycleController: LifecycleController {
+            parameters:
+                @display("p=50,200");
+        }            
+}
